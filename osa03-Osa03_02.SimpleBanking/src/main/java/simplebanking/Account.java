@@ -1,6 +1,7 @@
 package simplebanking;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,9 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Account extends AbstractPersistable<Long> {
+
+    @ManyToOne
+    private Client client;
 
     private String iban;
     private Integer balance;

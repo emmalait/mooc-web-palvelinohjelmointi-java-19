@@ -40,9 +40,12 @@ public class BankingController {
             account.setBalance(100);
             account = accountRepository.save(account);
         }
-
+        
         // DO SOMETHING HERE
-
+        
+        account.setClient(client);
+        accountRepository.save(account);
+        
         return "redirect:/";
     }
 }

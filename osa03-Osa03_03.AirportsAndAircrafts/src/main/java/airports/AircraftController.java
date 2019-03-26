@@ -1,5 +1,6 @@
 package airports;
 
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,19 @@ public class AircraftController {
         
         aircraftRepository.save(a);
         return "redirect:/aircrafts";
+    }
+    
+    @PostMapping("/aircrafts/{aircraftId}/airports")
+    public String assignAirport(@PathVariable Long aircraftId, @RequestParam Long airportId) {
+        Aircraft aircraft = aircraftRepository.getOne(aircraftId);
+        Airport airport = airportRepository.getOne(airportId);
+        aircraft.setAirport(airport);
+        if (airport.getAircrafts() == null) {
+            airport.setAircrafts(new ArrayList<>());
+        }
+        airport.getAircrafts().add(aircraft);
+        aircraftRepository.save(aircraft);
+        return "redirect:/aircrafts";   
     }
 
 }
