@@ -2,6 +2,8 @@ package airports;
 
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,4 +17,7 @@ public class Airport extends AbstractPersistable<Long> {
 
     private String identifier;
     private String name;
+    
+    @OneToMany(mappedBy = "airport")
+    private List<Aircraft> aircrafts;
 }
